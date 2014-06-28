@@ -1,0 +1,6 @@
+-cp app/haxe
+-js public/app.js
+-lib phaser
+# -lib jquery
+-lib jQueryExtern
+-main Main

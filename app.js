@@ -1,9 +1,7 @@
 (function () { "use strict";
 var Main = function() { };
 Main.main = function() {
-	new $(function() {
-		console.log("Hello World !");
-	});
+	console.log("Hello World !");
 };
 Main.main();
 })();

@@ -4,28 +4,9 @@ plumber    = require 'gulp-plumber'
 concat     = require 'gulp-concat'
 sass       = require 'gulp-sass'
 bowerFiles = require "gulp-bower-files"
-typescript = require "gulp-tsc"
 source     = require 'vinyl-source-stream'
 browserify = require 'browserify'
-tsd        = require 'gulp-tsd'
-typescript = require 'gulp-tsc'
-
-gulp.task 'js', ->
-  gulp
-    .src ['app/app.ts']
-    .pipe plumber()
-    .pipe typescript
-      sourcemap: true
-      outDir: './public'
-      target: 'ES5'
-      module: 'commonjs'
-    # .pipe rename 'app.js'
-    .pipe gulp.dest 'public'
-
-gulp.task 'tsd', ->
-  gulp
-    .src './gulp-tsd.json'
-    .pipe tsd()
+shell      = require 'gulp-shell'
 
 gulp.task 'coffee', ->
   browserify
@@ -44,6 +25,10 @@ gulp.task 'vendor', ->
     .pipe concat('vendor.js')
     .pipe gulp.dest('./public')
 
+gulp.task 'haxe', shell.task [
+  'haxe build.hxml'
+]
+
 gulp.task 'css', ->
   gulp
     .src './app/styles/*.scss'
@@ -54,9 +39,9 @@ gulp.task 'css', ->
 gulp.task 'watch', ['build'], ->
   gulp.watch 'app/**/*.coffee', ['coffee']
   gulp.watch 'app/**/*.jade', ['coffee']
-  gulp.watch 'app/**/*.ts', ['js']
+  gulp.watch 'app/haxe/**/*.hx', ['haxe']
   gulp.watch 'app/styles/**/*.scss', ['css']
   gulp.watch 'bower_components/**/*.js', ['vendor']
 
-gulp.task 'build', ['tsd','vendor', 'js', 'css', 'coffee']
+gulp.task 'build', ['vendor', 'haxe', 'css', 'coffee']
 gulp.task 'default', ['build']
