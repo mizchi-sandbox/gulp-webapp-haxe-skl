@@ -18,8 +18,11 @@
     "gulp-plumber": "^0.6.3",
     "gulp-rename": "^1.2.0",
     "gulp-sass": "^0.7.2",
+    "gulp-tsc": "^0.9.1",
+    "gulp-tsd": "0.0.2",
     "gulp-watch": "^0.6.8",
     "jadeify": "^2.3.0",
+    "typeify": "^0.1.1",
     "vinyl-source-stream": "^0.1.1"
   }
 }
